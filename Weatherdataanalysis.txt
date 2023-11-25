@@ -1,0 +1,48 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+weather_data = pd.read_csv('Weather Data.csv')
+
+print(weather_data.head())
+
+weather_data['Date'] = pd.to_datetime(weather_data['Date/Time'])
+
+plt.figure(figsize=(12, 6))
+
+# Temperature plot
+plt.subplot(3, 1, 1)
+plt.plot(weather_data['Date'], weather_data['Temp_C'], label='Temperature', color='red')
+plt.title('Temperature Trends Over Time')
+plt.xlabel('Date')
+plt.ylabel('Temperature (°C)')
+plt.legend()
+plt.grid(True)
+
+# Humidity plot
+plt.subplot(3, 1, 2)
+plt.plot(weather_data['Date'], weather_data['Rel Hum_%'], label='Rel Hum_%', color='blue')
+plt.title('Humidity Trends Over Time')
+plt.xlabel('Date')
+plt.ylabel('Rel Hum(%)')
+plt.legend()
+plt.grid(True)
+
+# Wind speed plot
+plt.subplot(3, 1, 3)
+plt.plot(weather_data['Date'], weather_data['Wind Speed_km/h'], label='Wind Speed', color='pink')
+plt.title('Wind Speed Trends Over Time')
+plt.xlabel('Date')
+plt.ylabel('Wind Speed (km/h)')
+plt.legend()
+plt.grid(True)
+
+#humidity vs visibilisty
+plt.subplot(3, 1, 3)
+plt.plot(weather_data['Rel Hum_%'], weather_data['Visibility_km'], label='visibility', color='green')
+plt.title('Wind Speed Trends Over Time')
+plt.xlabel('Date')
+plt.ylabel('Wind Speed (km/h)')
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+plt.show()

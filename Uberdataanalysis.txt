@@ -1,0 +1,57 @@
+import pandas as pd
+
+# Read your dataset into a Pandas DataFrame
+uber_data = pd.read_csv('UberDataset 3.csv')
+
+# Convert 'startdate' and 'enddate' columns to datetime objects, handle errors if any
+uber_data['startdate'] = pd.to_datetime(uber_data['START_DATE'], errors='coerce')
+uber_data['enddate'] = pd.to_datetime(uber_data['END_DATE'], errors='coerce')
+
+# Check the data types of 'startdate' and 'enddate' columns
+print(uber_data.dtypes)
+
+# Inspect the content of 'startdate' and 'enddate' columns
+print(uber_data[['startdate', 'enddate']].head())
+
+# Continue with the calculation of ride duration if the columns are in datetime format
+uber_data['ride_duration_minutes'] = (uber_data['enddate'] - uber_data['startdate']).dt.total_seconds() / 60.0
+
+# Display basic statistics of ride durations and miles traveled
+print("Statistics of Ride Duration in Minutes:")
+print(uber_data['ride_duration_minutes'].describe())
+
+
+# Verify the updated DataFrame
+print(uber_data.head())
+
+
+
+# Basic statistics of ride durations and miles traveled
+print(uber_data[['ride_duration_minutes', 'MILES']].describe())
+
+# Plot histogram of ride durations
+plt.figure(figsize=(8, 6))
+plt.hist(uber_data['ride_duration_minutes'], bins=30, color='skyblue', edgecolor='black')
+plt.title('Distribution of Ride Durations')
+plt.xlabel('Ride Duration (minutes)')
+plt.ylabel('Frequency')
+plt.grid(True)
+plt.show()
+
+# Analyze ride purposes
+ride_purpose_counts = uber_data['PURPOSE'].value_counts()
+print(ride_purpose_counts)
+
+# Visualize ride purposes using a bar plot
+plt.figure(figsize=(8, 6))
+ride_purpose_counts.plot(kind='bar', color='salmon')
+plt.title('Ride Purposes')
+plt.xlabel('Purpose')
+plt.ylabel('Count')
+plt.xticks(rotation=45)
+plt.grid(axis='y')
+plt.tight_layout()
+plt.show()
+
+
+

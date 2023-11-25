@@ -1,0 +1,125 @@
+import pandas as pd
+
+# Read the dataset into a Pandas DataFrame
+file_path = '/content/inv/sales.csv'
+inventory_df = pd.read_csv(file_path)
+
+# Display basic information about the dataset
+print(inventory_df.info())
+
+import pandas as pd
+
+# Read the dataset into a Pandas DataFrame, skipping specific rows
+file_path = '/content/inv/PurchasesFINAL12312016.csv'
+rows_to_skip = [37306]  # Add other row numbers if needed
+inventory_df = pd.read_csv(file_path, skiprows=rows_to_skip)
+
+# Display basic information about the dataset
+print(inventory_df.info())
+
+import pandas as pd
+
+# Read the dataset into a Pandas DataFrame, skipping specified rows
+file_path = '/content/inv/EndInvFINAL.csv'
+rows_to_skip = range(212912, 212915)  # Adjust row numbers as needed
+inventory_df = pd.read_csv(file_path, skiprows=rows_to_skip, error_bad_lines=False)
+
+# Display basic information about the dataset
+print(inventory_df.info())
+
+
+import pandas as pd
+
+# Read the dataset into a Pandas DataFrame
+file_path = '/content/inv/BegInvFINAL.csv'
+inventory_df = pd.read_csv(file_path)
+
+# Display basic information about the dataset
+print(inventory_df.info())
+
+import pandas as pd
+
+# Read the dataset into a Pandas DataFrame
+file_path = '/content/inv/2017PurchasePricesDec.csv'
+inventory_df = pd.read_csv(file_path)
+
+# Display basic information about the dataset
+print(inventory_df.info())
+
+import pandas as pd
+
+# Assuming InvoicePurchases is a variable to hold a DataFrame
+# You might load a CSV file into this DataFrame
+file_path = '/content/inv/InvoicePurchases.csv'
+InvoicePurchases = pd.read_csv(file_path)
+
+# Now you can check for null values using .isnull().sum()
+null_counts = InvoicePurchases.isnull().sum()
+print(null_counts)
+
+InvoicePurchases.shape
+
+InvoicePurchases['InvoiceDate'] = pd.to_datetime(InvoicePurchases['InvoiceDate'])
+InvoicePurchases['Total Amount'] = InvoicePurchases['Dollars'] + InvoicePurchases['Freight']
+InvoicePurchases.head(2)
+InvoicePurchases['Approval'].unique()
+
+High_purchases_item =InvoicePurchases.loc[InvoicePurchases['Quantity'].idxmax(), 'VendorName']
+Quty = InvoicePurchases['Quantity'].max()
+print("High Prchuse Vendor Name:- ",High_purchases_item,"Quantity :-", Quty)
+
+total_num_of_invoice = InvoicePurchases[InvoicePurchases['VendorName'] == 'DIAGEO NORTH AMERICA INC   '].shape[0]
+print('Total Number Of Invoice:-',total_num_of_invoice)
+Spend_Total_Amount =InvoicePurchases.loc[InvoicePurchases['VendorName'] == 'DIAGEO NORTH AMERICA INC   ','Total Amount'].sum()
+print("Spend Total Amount:-",Spend_Total_Amount)
+
+Low_purchases_item =InvoicePurchases.loc[InvoicePurchases['Quantity'].idxmin(), 'VendorName']
+Quty2 = InvoicePurchases['Quantity'].min()
+print("Low Prchuse Vendor Name:- ",Low_purchases_item,"Quantity :-", Quty2)
+
+Spend_Total_Amount =InvoicePurchases.loc[InvoicePurchases['VendorName'] == 'HOOD RIVER DISTILLERS, Inc.','Total Amount'].sum()
+print("Spend Total Amount:-",Spend_Total_Amount)
+
+import pandas as pd
+
+# Assuming 'sales_data.csv' is in the current directory
+sales = pd.read_csv('/content/inv/sales.csv')
+
+# Display the first few rows of the 'sales' DataFrame
+print(sales.head())
+
+import pandas as pd
+
+# Read the dataset into a Pandas DataFrame
+file_path = '/content/inv/sales.csv'
+inventory_df = pd.read_csv(file_path)
+
+# Display basic information about the dataset
+print(inventory_df.info())
+print(sales.head())
+# Assuming you have defined or imported the 'sales' DataFrame before this code snippet
+#print(SalesFinal.head())
+
+
+sales['Total Amount'] = sales['SalesDollars'] + sales['ExciseTax']
+
+High_sales_item =sales.loc[sales['SalesQuantity'].idxmax(), 'VendorName']
+Quty3 = sales['SalesQuantity'].max()
+print("High sales Vendor Name:- ",High_sales_item,"Quantity :-", Quty3)
+
+total_num_of_invoice3 = sales[sales['VendorName'] == 'E & J GALLO WINERY         '].shape[0]
+print('Total Number Of Invoice:-',total_num_of_invoice3)
+Spend_Total_Amount3 =sales.loc[sales['VendorName'] == 'E & J GALLO WINERY         ','Total Amount'].sum()
+print("Spend Total Amount:-",Spend_Total_Amount3)
+
+Low_sales_item =sales.loc[sales['SalesQuantity'].idxmin(), 'VendorName']
+Quty4 = sales['SalesQuantity'].min()
+print("Low sales Vendor Name:- ",Low_sales_item,"Quantity :-", Quty4)
+
+Spend_Total_Amount4 =sales.loc[sales['VendorName'] == 'JIM BEAM BRANDS COMPANY    ','Total Amount'].sum()
+print("Spend Total Amount:-",Spend_Total_Amount4)
+
+import seaborn as sns
+
+sns.barplot(x='Total Amount', y='Description', data=sales)
+
